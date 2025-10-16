@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toko Online</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    Toko Online
+  </header>
+
+  <nav>
+    <a href="admin.html">Admin</a>
+    <a href="member.html">Member</a>
+  </nav>
+
+  <!-- ✅ Banner Ganti Gambar Saat Diklik -->
+  <div class="banner" onclick="nextBanner()">
+    <div class="banner-slider">
+      <img id="bannerImage1" class="active" src="images/Gambar-WhatsApp-2025-03-06-pukul-113009_4a61a116-4275252321.webp" alt="Banner 1">
+      <img id="bannerImage2" class="next" src="" alt="Banner 2">
+    </div>
+    <div class="image-title">TOKO BATIK ILHAM</div>
+  </div>
+
+  <div class="content">
+    <div class="grid-container">
+
+      <div class="grid-item">
+        <div class="product-image">
+          <img src="images/baju.jpg" alt="Baju" width="150" height="150">
+        </div>
+        <div class="product-info">
+          <p>Baju</p>
+          <p>Rp. 300.000</p>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <div class="product-image">
+          <img src="images/jaket.jpg" alt="Jaket" width="150" height="150">
+        </div>
+        <div class="product-info">
+          <p>Jaket</p>
+          <p>Rp. 300.000</p>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <div class="product-image">
+          <img src="images/kaoskaki.jpg" alt="Kaos Kaki" width="150" height="150">
+        </div>
+        <div class="product-info">
+          <p>Kaos Kaki</p>
+          <p>Rp. 15.000</p>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <div class="product-image">
+          <img src="images/sarung.jpg" alt="Sarung" width="150" height="150">
+        </div>
+        <div class="product-info">
+          <p>Sarung</p>
+          <p>Rp. 90.000</p>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <div class="product-image">
+          <img src="images/topi.jpg" alt="Topi" width="150" height="150">
+        </div>
+        <div class="product-info">
+          <p>Topi</p>
+          <p>Rp. 70.000</p>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <div class="product-image">
+          <img src="images/tas.jpg" alt="Tas" width="150" height="150">
+        </div>
+        <div class="product-info">
+          <p>Tas</p>
+          <p>Rp. 200.000</p>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <div class="product-image">
+          <img src="images/sarungtangan.jpg" alt="Sarung Tangan" width="150" height="150">
+        </div>
+        <div class="product-info">
+          <p>Sarung Tangan</p>
+          <p>Rp. 80.000</p>
+        </div>
+      </div>
+
+      <div class="grid-item">
+        <div class="product-image">
+          <img src="images/jamtangan.jpg" alt="Jam Tangan" width="150" height="150">
+        </div>
+        <div class="product-info">
+          <p>Jam Tangan</p>
+          <p>Rp. 500.000</p>
+        </div>
+      </div>
+
+    </div>
+
+    <aside class="sidebar">
+      <h3>Rekomendasi</h3>
+      <div class="recommendation">
+        <div class="product-image">
+          <img src="images/batiknusantara.jpg" alt="Batik Nusantara" width="150" height="150">
+        </div>
+        <div class="product-info">
+          <p>Batik Nusantara</p>
+          <p>Rp. 120.000</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  
+
+  <footer>
+    &copy; Toko Online Ilham
+  </footer>
+
+  <script>
+    function detailimg() {
+      $(.content).show();
+    }
+
+    function closeimg() {
+      $(.content).hide();
+    }
+const bannerImages = [
+  "images/Gambar-WhatsApp-2025-03-06-pukul-113009_4a61a116-4275252321.webp",
+  "images/DSC00665-scaled.jpg",
+  "images/tokoBatik/2.webp",
+  "images/tokoBatik/3.webp",
+  "images/tokoBatik/4.webp",
+  "images/tokoBatik/5.webp",
+  "images/tokoBatik/6.jpeg",
+  "images/tokoBatik/7.webp",
+  "images/tokoBatik/8.jpg",
+  "images/tokoBatik/toko1.jpg"
+];
+
+let currentIndex = 0;
+let isSliding = false;
+
+function nextBanner() {
+  if (isSliding) return;
+  isSliding = true;
+
+  const img1 = document.getElementById("bannerImage1");
+  const img2 = document.getElementById("bannerImage2");
+
+  // Tentukan index gambar berikutnya
+  const nextIndex = (currentIndex + 1) % bannerImages.length;
+
+  // Set src gambar berikutnya
+  img2.src = bannerImages[nextIndex];
+
+  // Atur posisi awal
+  img2.className = "next";
+  img1.className = "active";
+
+  // Paksa reflow agar transisi berjalan
+  void img2.offsetWidth;
+
+  // Mulai animasi slide
+  img1.className = "slide";
+  img2.className = "active";
+
+  setTimeout(() => {
+    // Setelah animasi, swap posisi
+    img1.className = "next";
+    img2.className = "active";
+    // Tukar id agar img1 selalu yang aktif
+    img1.id = img1.id === "bannerImage1" ? "bannerImage2" : "bannerImage1";
+    img2.id = img2.id === "bannerImage1" ? "bannerImage2" : "bannerImage1";
+    currentIndex = nextIndex;
+    isSliding = false;
+  }, 600);
+}
+
+// Slideshow otomatis setiap 3 detik
+setInterval(nextBanner, 3000);
+
+// Inisialisasi gambar pertama
+window.onload = function() {
+  document.getElementById("bannerImage1").src = bannerImages[0];
+  document.getElementById("bannerImage2").src = "";
+};
+  </script>
+
+</body>
+</html>
